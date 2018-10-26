@@ -2,11 +2,9 @@ package test3;
 
 class Skill {
 	int damage,defens,time;
+	char name;
 	Skill () {
-		damage = 0;defens = 0;time = 0;
-	}
-	void setSkill(int damage,int defens,int time){
-		this.damage = damage;this.defens = defens;this.time = time;
+		damage = 0;defens = 0;time = 0;name = '*';
 	}
 }
 
@@ -17,11 +15,14 @@ class Skill {
  
  class InitiativeSkill extends Skill{
 	 int distance;
-	 void setInitiativeSkill (int damage,int defens,int time,int distance) {
-		 this.damage = damage;this.defens = defens;this.time = time;this.distance = distance;
+	 char skill = '*';
+	 void setInitiativeSkill () {
+		 damage = 9; defens = 0; time = 2; distance = 2;
 	 }
  }
  
  class PassivitySkill extends Skill{
-	 
+	 void setPassivitySkill () {
+		 damage = 5; defens = 4; time = 2;
+	 }
  }

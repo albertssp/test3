@@ -25,7 +25,7 @@ class Round implements Attachment{
 	//shooter  ÉäÊÖ
 	public static char []playrole = {'F','S'};
 
-	int time = 1;
+	int time = 2;
 	int role = 1;
 	public void run (BattleField B, int n) {
 		setRoleManage();
@@ -42,9 +42,7 @@ class Round implements Attachment{
 				B.battle[i][j]=player[role].A.name;
 				role++;
 			}
-		}
-			
-		B.displayBattle();
+		}		
 		move(B,n);
 	}
 	public void setRoleManage() {
@@ -57,29 +55,42 @@ class Round implements Attachment{
 	}
 	public void move (BattleField B,int s) {
 		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int m = sc.nextInt();
-		while (n != 0&&m != 0) {
-			int k = 1;
-			if (k>8) break;
-			B.setBattleField(s);
-			for (int i = 0; i<s; i++) {
-				for (int j = 0; j<s; j++) {
-					if (i==n&&j==m) {
-						B.battle[n][m] = player[k].A.name;
-						k++;
+		
+		int[][] moving = new int [10][2];
+		for (int h= 0; h<10; h++) {
+			int n = sc.nextInt();
+			int m = sc.nextInt();
+			if (B.battle[n][m] == '0' || B.battle[n][m] == '|' || B.battle[n][m] == '-') {
+				System.out.println("Error!You are knocking the wall!Please go on the right way!");
+				n = sc.nextInt();
+				m = sc.nextInt();
+				moving[h][0] = n;
+				moving[h][1] = m;
+			}
+			else {
+				moving[h][0] = n;
+				moving[h][1] = m;
+			}
+		}
+		
+		B.setBattleField(s);
+		for (int i = 0; i<s; i++) {
+			for (int j = 0; j<s; j++) {
+				for (int k = 0; k<10; k++) {
+					if (i==moving[k][0]&&j==moving[k][1]) {
+						B.battle[i][j] = player[k+1].A.name;
+						
+						
 					}
 				}
 			}
-			B.displayBattle();
-			n = sc.nextInt();
-			m = sc.nextInt();
-			
 		}
+		B.displayBattle();
+		System.out.println("Round over!");
 		
 		
-		time = 0;
-		sc.close();
+		time --;
+		
 	}
 }
 

@@ -10,6 +10,7 @@ public class Main {
 		int n = sc.nextInt();
 		BattleField battle = new BattleField();
 		battle.setBattleField(n);
+		battle.displayBattle();
 		Round r = new Round();
 		while (r.time!=0) {
 			r.run(battle, n);
